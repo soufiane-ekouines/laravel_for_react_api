@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\UsersController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(function()  {
-    
+
     Route::post('logout',[ AuthController::class,'logout']);
 
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+  Route::get('/users', [UsersController::class,'index']);
+  Route::delete('/user/{user}', [UsersController::class,'delete']);
 
     
 });
